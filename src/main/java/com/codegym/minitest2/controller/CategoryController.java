@@ -1,6 +1,8 @@
 package com.codegym.minitest2.controller;
 
+import com.codegym.minitest2.model.dto.Statistical;
 import com.codegym.minitest2.model.entity.Category;
+import com.codegym.minitest2.model.entity.Task;
 import com.codegym.minitest2.service.ICategoryService;
 import com.codegym.minitest2.service.ITaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,5 +65,23 @@ public class CategoryController {
         categoryService.remove(id);
         redirectAttributes.addFlashAttribute("message", "delete category successfully!");
         return "redirect:/category";
+    }
+    @GetMapping("/view-category/{id}")
+    public ModelAndView view(@PathVariable("id") Long id){
+        Optional<Category> categoryOptional = categoryService.findById(id);
+        if (!categoryOptional.isPresent()){
+            return new ModelAndView("/error_404");
+        }
+        Iterable<Task> tasks = taskService.findAllByCategory(categoryOptional.get());
+        ModelAndView modelAndView = new ModelAndView("/task/index");
+        modelAndView.addObject("tasks", tasks);
+        return modelAndView;
+    }
+    @GetMapping("/statistical")
+    public ModelAndView statistical(){
+        ModelAndView modelAndView = new ModelAndView("/category/statistical");
+        Iterable<Statistical> statisticals = categoryService.statistical();
+        modelAndView.addObject("statisticals", statisticals);
+        return modelAndView;
     }
 }
