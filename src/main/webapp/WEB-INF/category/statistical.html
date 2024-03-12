@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: head">
+    <title>ListTask</title>
+</head>
+<body>
+<h3>Tasks</h3>
+<h1>list category</h1>
+<table id = "tasks">
+    <thead>
+    <tr>
+        <th>STT</th>
+        <th>Name Category</th>
+        <th>Total Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="s,sStatus : ${statisticals}">
+        <td th:text="${sStatus.count}"></td>
+        <td th:text="${s.getNameCategory()}"></td>
+        <td th:text="${s.getTotalPrice()}"></td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
