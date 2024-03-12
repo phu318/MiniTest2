@@ -47,6 +47,6 @@ public class TaskService implements ITaskService {
 
     @Override
     public Page<Task> findAllByName(Pageable pageable, String nameTask) {
-        return iTaskRepository.findAllByNameTaskContaining(pageable, nameTask);
+        return iTaskRepository.findAllByNameContaining(pageable, nameTask);
     }
 }

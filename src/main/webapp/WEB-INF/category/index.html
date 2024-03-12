@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="/layout :: head">
-    <title>List Category</title>
+    <title>Mini Test 2</title>
 </head>
 <body>
 <h3>Categories</h3>
 <p>
     <a th:href="@{/category/create}">
-        Add new Category
+        Add new category
     </a>
 </p>
 <p>
     <a th:href="@{/tasks}">
-        Tasks
+        Task list
     </a>
 </p>
 <div class="notify">
@@ -27,6 +27,7 @@
         <th>STT</th>
         <th>Name</th>
         <th>Description</th>
+        <th>Total Amount</th>
         <th>Update</th>
         <th>Delete</th>
     </tr>
@@ -34,10 +35,10 @@
     <tbody>
     <tr th:each="c, cStatus : ${category}">
         <td th:text="${cStatus.count}"></td>
-        <td th:text="${c.getNameCategory()}"></td>
+        <td><a th:href="@{/category/view-category/{id}(id=${c.getId()})}" th:text="${c.getName()}"></a></td>
         <td th:text="${c.getDescription()}"></td>
-        <td><a th:href="@{/category/update/{id}(id=${c.getId_Category()})}">update</a></td>
-        <td><a th:href="@{/category/delete/{id}(id=${c.getId_Category()})}">delete</a></td>
+        <td><a th:href="@{/category/update/{id}(id=${c.getId()})}">update</a></td>
+        <td><a th:href="@{/category/delete/{id}(id=${c.getId()})}">delete</a></td>
     </tr>
     </tbody>
 </table>

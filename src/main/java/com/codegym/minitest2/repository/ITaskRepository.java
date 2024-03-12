@@ -9,5 +9,5 @@ import org.springframework.data.repository.CrudRepository;
 public interface ITaskRepository extends CrudRepository<Task, Long> {
     Iterable<Task> findAllByCategory(Category category);
     Page<Task> findAll(Pageable pageable);
-    Page<Task> findAllByNameTaskContaining(Pageable pageable, String nameTask);
+    Page<Task> findAllByNameContaining(Pageable pageable, String nameTask);
 }
